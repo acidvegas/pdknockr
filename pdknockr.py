@@ -10,7 +10,7 @@ except ImportError:
     raise SystemExit('missing required \'aiodns\' module (pip install aiodns)')
 
 
-async def dns_lookup(domain: str, subdomain: str, dns_server: str):
+async def dns_lookup(domain: str, subdomain: str, dns_server: str, dns_type: str, semaphore: asyncio.Semaphore):
     '''
     Perform a DNS lookup on a target domain.
     
@@ -18,39 +18,47 @@ async def dns_lookup(domain: str, subdomain: str, dns_server: str):
     :param subdomain: The subdomain to look up.
     :param dns_server: The DNS server to perform the lookup on.
     '''
-    domain = f'{subdomain}.{domain}'
-    resolver = aiodns.DNSResolver(nameservers=[dns_server])
-    try:
-        answers = await resolver.query(domain, 'A')
-        print(f'[\033[92mDONE\033[0m] Knocking \033[96m{domain}\033[0m on \033[93m{dns_server}\033[0m')
-    except Exception as e:
-        print(f'Error resolving {domain} using {dns_server}: {e}')
+    async with semaphore:
+        target = f'{subdomain}.{domain}'
+        resolver = aiodns.DNSResolver(nameservers=[dns_server])
+        try:
+            await resolver.query(target, dns_type)
+            print(f'[\033[92mDONE\033[0m] Knocking \033[96m{target}\033[0m on \033[93m{dns_server}\033[0m')
+        except Exception as e:
+            print(f'[\033[31mFAIL\033[0m] Knocking \033[96m{target}\033[0m on \033[93m{dns_server}\033[0m \033[90m({e})\033[0m')
 
 
-async def main(input_file: str, domains: str, subdomain: str, concurrency: int):
+async def main(args):
     '''
     Main function for the program.
     
-    :param input_file: The file containing the list of domains to perform lookups on.
-    :param domains: The comma seperated list of domains to perform lookups on.
-    :param subdomain: The subdomain to look up.
-    :param concurrency: The maximum number of concurrent lookups to perform.
+    :param args: The arguments passed to the program.
     '''
-    semaphore = asyncio.BoundedSemaphore(concurrency)
+    global dns_servers
+
+    semaphore = asyncio.BoundedSemaphore(args.concurrency)
+    tasks = []
 
     if args.domains:
-        domains = args.domains.split(',')
-        async for domain in domains:
+        for domain in args.domains.split(','):
             for dns_server in dns_servers:
-                await semaphore.acquire()
-                asyncio.create_task(dns_lookup(domain, subdomain, dns_server, semaphore))
+                if len(tasks) < args.concurrency:
+                    task = asyncio.create_task(dns_lookup(domain, args.subdomain, dns_server, args.rectype, semaphore))
+                    tasks.append(task)
+                else:
+                    done, pending = await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
+                    tasks = list(pending)
 
     elif args.input:
-        async with asyncio.open_file(input_file, 'r') as file:
-            async for domain in file:
-                await semaphore.acquire()
-                dns_server = random.choice(dns_servers)
-                asyncio.create_task(dns_lookup(domain, subdomain, dns_server, semaphore))
+        async with asyncio.open_file(args.input, 'r') as file:
+            for domain in file:
+                for dns_server in dns_servers:
+                    if len(tasks) < args.concurrency:
+                        task = asyncio.create_task(dns_lookup(domain, args.subdomain, dns_server, args.rectype, semaphore))
+                        tasks.append(task)
+                    else:
+                        done, pending = await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
+                        tasks = list(pending)
 
 
 
@@ -63,20 +71,24 @@ if __name__ == '__main__':
     parser.add_argument('-d', '--domains', help='Comma seperate list of domains')
     parser.add_argument('-i', '--input', help='File containing list of domains')
     parser.add_argument('-s', '--subdomain', help='Subdomain to look up')
-    parser.add_argument('-c', '--concurrency', type=int, default=50, help='Concurrency limit')
+    parser.add_argument('-c', '--concurrency', type=int, default=50, help='Concurrency limit (default: 50)')
     parser.add_argument('-r', '--resolvers', help='File containing list of DNS resolvers (uses public-dns.info if not specified)')
+    parser.add_argument('-rt', '--rectype', default='A', help='DNS record type (default: A)')
     args = parser.parse_args()
 
-    if not args.input and not args.domain:
+    if not args.input and not args.domains:
         raise SystemExit('no domains specified')
     
-    if args.input and args.domain:
+    elif args.input and args.domains:
         raise SystemExit('cannot specify both domain and input file')
     
-    if args.input and not os.path.exists(args.input):
+    elif args.input and not os.path.exists(args.input):
         raise SystemExit('input file does not exist')
+
+    elif args.rectype and args.rectype not in ['A', 'AAAA', 'CNAME', 'MX', 'NS', 'PTR', 'SOA', 'SRV', 'TXT']:
+        raise SystemExit('invalid record type')
     
-    if args.resolvers:
+    elif args.resolvers:
         if os.path.exists(args.resolvers):
             with open(args.resolvers, 'r') as file:
                 dns_servers = [item.strip() for item in file.readlines() if item.strip()]
@@ -90,4 +102,4 @@ if __name__ == '__main__':
         dns_servers = urllib.request.urlopen('https://public-dns.info/nameservers.txt').read().decode().split('\n')
         print(f'Loaded {len(dns_servers):,} DNS servers from public-dns.info')
 
-    asyncio.run(main(args.input, args.domain, args.subdomain, args.concurrency))
+    asyncio.run(main(args))
