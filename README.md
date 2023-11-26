@@ -14,6 +14,8 @@ The program operates by accepting a list of DNS resolver addresses and a seed va
     - astro.login.domain.net 
     - customer-cdn.1220.domain.org
 
+The seeds here are 220, astro, and 1220. Unique things we can look for in the future.
+
 Every sweep, we will generate a random seed for each dns server and save it to a seed.key file.
 
 This is all very theoretical right now, interested to see how this pans out.
