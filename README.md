@@ -1,5 +1,5 @@
 # pdKnockr
-> A passive DNS "dive-by" tool
+> A passive DNS "drive-by" tool
 
 This tool is designed to detect passive DNS servers that are logging DNS queries by performing targeted subdomain lookups on a list of specified DNS resolvers. The core functionality of the program lies in its ability to generate unique subdomains using a seed value, ensuring that each query is distinct and traceable. This approach is particularly effective in identifying passive DNS servers, which typically log and store DNS queries for analysis and tracking purposes. By generating these unique queries, the tool can pinpoint which DNS resolvers are passively logging requests, a critical insight for network security analysis and privacy assessments.
 
