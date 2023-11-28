@@ -130,7 +130,6 @@ if __name__ == '__main__':
     dns_keys = dict()
     for dns_server in dns_servers:
         dns_keys[dns_server] = generate_subdomain(sub_domains)
-        logging.info(f'{dns_server} will have a key of {dns_keys[dns_server]}')
     with open('dns_keys.txt', 'w') as file:
         json.dump(dns_keys, file)
     
