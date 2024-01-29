@@ -1,0 +1,115 @@
+75.75.75.75            # Comcast
+75.75.76.76            # Comcast
+68.87.64.146           # Comcast
+68.87.75.194           # Comcast
+68.87.73.246           # Comcast
+68.87.73.242           # Comcast
+68.87.72.134           # Comcast
+68.87.72.130           # Comcast
+68.87.75.198           # Comcast
+68.87.68.166           # Comcast
+68.87.68.162           # Comcast
+68.87.74.162           # Comcast
+68.87.74.166           # Comcast
+68.87.76.178           # Comcast
+68.87.76.182           # Comcast
+2001:558:feed::1       # Comcast
+2001:558:feed::2       # Comast
+68.94.156.1            # AT&T
+68.94.157.1            # AT&T
+12.127.17.72           # AT&T
+12.127.16.68           # AT&T
+24.196.64.53           # Charter
+71.10.216.1            # Charter
+71.10.216.2            # Charter
+2607:f428:ffff:ffff::1 # Charter
+2607:f428:ffff:ffff::2 # Charter
+68.105.28.16           # Cox
+68.105.29.16           # Cox
+68.1.16.107            # Cox
+68.1.16.108            # Cox (Eastcoast)
+68.111.106.68          # Cox (Westcoast)
+71.10.216.1            # Spectrum
+71.10.216.2            # Spectrum
+209.18.47.61           # Spectrum
+209.18.47.62           # Spectrum
+71.10.142.101          # Spectrum
+2607:f428:ffff:ffff::1 # Spectrum
+2607:f428:ffff:ffff::2 # Spectrum
+1.243.0.14             # Verizon
+1.243.0.12             # Verizon
+8.237.161.14           # Verizon
+8.237.161.12           # Verizon
+1.250.0.14             # Verizon
+1.250.0.12             # Verizon
+1.242.0.14             # Verizon
+1.242.0.12             # Verizon
+1.252.0.14             # Verizon
+1.252.0.12             # Verizon
+8.238.120.14           # Verizon
+8.238.120.12           # Verizon
+8.238.112.14           # Verizon
+8.238.112.12           # Verizon
+68.238.96.14           # Verizon
+68.238.96.12           # Verizon
+8.238.64.14            # Verizon
+8.238.64.12            # Verizon
+8.238.128.14           # Verizon
+8.238.128.12           # Verizon
+8.238.0.14             # Verizon
+8.238.0.12             # Verizon
+151.197.0.38           # Verzion
+151.202.0.85           # Verizon
+151.202.0.84           # Verizon
+199.45.32.37           # Verizon
+199.45.32.43           # Verizon
+151.203.0.85           # Verizon
+199.45.32.40           # Verizon
+151.197.0.39           # Verizon
+199.45.32.38           # Verizon
+209.18.47.61           # Time Warner
+209.18.47.62           # Time Warner
+209.193.4.7            # ACS Alaska
+209.112.160.2          # ACS Alaska
+205.188.146.145        # AOL
+65.32.1.65             # Brighthouse
+65.32.1.70             # Brighthouse
+205.171.3.65           # Century Link
+205.171.2.65           # Century Link
+205.171.202.166        # Century Link
+205.171.2.26           # Century Link
+205.171.3.26           # Century Link
+205.171.3.66           # Century Link
+205.171.2.25           # Century Link
+205.171.3.25           # Century Link
+216.68.4.10            # Cincinnati Bell (ZoomTown)
+216.68.5.10            # Cincinnati Bell (ZoomTown)
+216.68.1.100           # Cincinnati Bell (Fuze)
+216.68.2.100           # Cincinnati Bell (Fuze)
+207.69.188.185         # Earthlink
+207.69.188.186         # Earthlink
+207.69.188.187         # Earthlink
+74.40.74.40            # Frontier
+74.40.74.41            # Frontier
+8.8.8.8                # Google
+8.8.4.4                # Google
+108.166.149.2          # Mediacom (New York)
+108.166.149.3          # Mediacom (New York)
+97.64.183.162          # Mediacom (Missouri)
+97.64.183.163          # Mediacom (Missouri)
+97.64.183.164          # Mediacom (Missouri)
+97.64.209.34           # Mediacom (Georgia)
+97.64.209.35           # Mediacom (Georgia)
+97.64.209.37           # Mediacom (Georgia)
+97.64.168.10           # Mediacom (Iowa)
+97.64.168.11           # Mediacom (Iowa)
+167.206.112.138        # Optimum
+167.206.7.4            # Optimum
+208.180.42.100         # Suddenlink
+66.76.175.100          # Suddenlink
+166.102.165.32         # Windstream
+207.92.5.32            # Windstream
+166.102.165.11         # Windstream
+207.91.5.20            # Windstream
+24.119.5.32            # Sparklight
+24.116.0.206           # Sparklight

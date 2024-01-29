@@ -25,6 +25,14 @@ This will return `151.202.0.84`, marking it as a DNS server that is actively log
 
 ## WORK IN PROGRESS (STAY TUNED)
 
+- [ ] Bind server running accepting wildcard DNS lookups on custom domain.
+- [ ] Hunt down specific DNS servers used by ISP's from an ASN lookup
+- [ ] Any way to apply this to custom DNS servers used by VPNs?
+
 This is all very theoretical right now, interested to see how this pans out.
 
 Stats and proof coming soon. Get fucking fucked white-ops 💯
+
+___
+
+###### Mirrors for this repository: [acid.vegas](https://git.acid.vegas/pdknockr) • [SuperNETs](https://git.supernets.org/acidvegas/pdknockr) • [GitHub](https://github.com/acidvegas/pdknockr) • [GitLab](https://gitlab.com/acidvegas/pdknockr) • [Codeberg](https://codeberg.org/acidvegas/pdknockr)
