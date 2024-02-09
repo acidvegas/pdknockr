@@ -1,0 +1,12 @@
+103.86.96.100  # NordVPN
+103.86.99.100  # NordVPN
+104.223.91.194 # TorGuard
+104.223.91.210 # TorGuard
+35.170.152.112 # TorGuard
+34.228.48.172  # TorGuard
+
+https://mullvad.net/en/help/dns-over-https-and-dns-over-tls
+
+54.225.156.17 ns1.airvpn.org
+52.48.66.85   ns2.airvpn.org
+dig ANY earth.all.vpn.airdns.org @dns1.airvpn.org +short

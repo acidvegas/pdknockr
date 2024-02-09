@@ -26,8 +26,9 @@ This will return `151.202.0.84`, marking it as a DNS server that is actively log
 ## WORK IN PROGRESS (STAY TUNED)
 
 - [ ] Bind server running accepting wildcard DNS lookups on custom domain.
-- [ ] Hunt down specific DNS servers used by ISP's from an ASN lookup
+- [X] Hunt down specific DNS servers used by ISP's from an ASN lookup
 - [ ] Any way to apply this to custom DNS servers used by VPNs?
+- [ ] Noise generator to abuse known logging servers.
 
 This is all very theoretical right now, interested to see how this pans out.
 

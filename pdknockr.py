@@ -59,15 +59,18 @@ async def main(args):
     semaphore = asyncio.BoundedSemaphore(args.concurrency)
     tasks = []
 
-    for domain in args.domains.split(','):
-        for dns_server in dns_keys:
-            if len(tasks) < args.concurrency:
-                query_record = random.choice(args.rectype)
-                task = asyncio.create_task(dns_lookup(domain, dns_keys[dns_server], dns_server, query_record, args.timeout, semaphore))
-                tasks.append(task)
-            else:
-                done, pending = await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
-                tasks = list(pending)
+    while True:
+        for domain in args.domains.split(','):
+            for dns_server in dns_keys:
+                if len(tasks) < args.concurrency:
+                    query_record = random.choice(args.rectype)
+                    task = asyncio.create_task(dns_lookup(domain, dns_keys[dns_server], dns_server, query_record, args.timeout, semaphore))
+                    tasks.append(task)
+                else:
+                    done, pending = await asyncio.wait(tasks, return_when=asyncio.FIRST_COMPLETED)
+                    tasks = list(pending)
+        if not args.noise:
+            break
 
 
 
@@ -83,6 +86,7 @@ if __name__ == '__main__':
     parser.add_argument('-r', '--resolvers', help='File containing list of DNS resolvers (uses public-dns.info if not specified)')
     parser.add_argument('-rt', '--rectype', default='A,AAAA', help='Comma-seperated list of  DNS record type (default: A)')
     parser.add_argument('-t', '--timeout', type=int, default=3, help='Timeout for DNS lookup (default: 3)')
+    parser.add_argument('-n', '--noise', action='store_true', help='Enable random subdomain noise')
     args = parser.parse_args()
 
     sh = logging.StreamHandler()
