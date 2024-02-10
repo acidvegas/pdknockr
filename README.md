@@ -16,21 +16,17 @@ Th program will start firing off DNS queries to all the resolvers using the cust
 
 ![](.screens/preview.png)
 
-After testing across multiple IP addresses over time, if we ever see `download.event.supernets.org` show up on any passive DNS lookup engines, we can simple use the following command:
-
-```bash
-jq 'to_entries | map({key: .value, value: .key}) | from_entries | ."download.event"' dns_keys.txt
-```
-
-This will return `151.202.0.84`, marking it as a DNS server that is actively logging all DNS queries that pass through.
+After testing across multiple IP addresses over time, if we ever see `download.event.supernets.org` show up on any passive DNS lookup engines, refer to our logs, which will show it was looked up on `151.202.0.84`, marking it as a DNS server that is actively logging all DNS queries that pass through.
 
 
 ## WORK IN PROGRESS (STAY TUNED)
 
 - [ ] Bind server running accepting wildcard DNS lookups on custom domain.
+- [ ] DNS-over-TLS *(DoT)* and DNS-over-HTTPS *(DoH)* support
 - [X] Hunt down specific DNS servers used by ISP's from an ASN lookup
-- [ ] Any way to apply this to custom DNS servers used by VPNs?
+- [X] Any way to apply this to custom DNS servers used by VPNs?
 - [X] Noise generator to abuse known logging servers.
+- [X] Memory effiency attains via yielding generators to handle large input files
 
 This is all very theoretical right now, interested to see how this pans out.
 
